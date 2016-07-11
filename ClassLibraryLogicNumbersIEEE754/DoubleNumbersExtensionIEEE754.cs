@@ -19,7 +19,8 @@ namespace ClassLibraryLogicNumbersIEEE754
         /// </summary>
         public static string BinaryFormatIEEE754(this double number)
         {
-            BitArray resultBitArray = new BitArray(64);
+            int numOfBits = 64;
+            BitArray resultBitArray = new BitArray(numOfBits);
 
             int sign = ((int)number >> 63) & 1;
             resultBitArray[63] = (sign == 1);
@@ -112,7 +113,7 @@ namespace ClassLibraryLogicNumbersIEEE754
                 order /= 2;
             }
 
-            SetCharToBitArray(bitArray, result.ToCharArray(), 62);
+            SetCharToBitArray(bitArray, result.ToCharArray(), bitArray.Length-2);
         }
 
         /// <summary>
