@@ -63,7 +63,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JaggesArrayTests.cs" />
+    <Compile Include="CompareAbsMaxLine.cs" />
+    <Compile Include="CompareAbsMaxLineDesc.cs" />
+    <Compile Include="CompareMinLine.cs" />
+    <Compile Include="CompareMinLineDesc.cs" />
+    <Compile Include="CompareSumLine.cs" />
+    <Compile Include="CompareSumLineDesc.cs" />
+    <Compile Include="JaggedArrayTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

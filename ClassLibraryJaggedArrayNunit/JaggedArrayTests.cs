@@ -9,40 +9,24 @@ using NUnit.Framework;
 namespace ClassLibraryJaggedArrayNunit
 {
     [TestFixture]
-    public class JaggesArrayTests
+    public class JaggedArrayTests
     {
         [Test]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void JaggedArrayMethodTest_SortArraySumEl_ReturnedException()
+        [ExpectedException(typeof(ArgumentException))]
+        public void JaggedArrayTest_SortArrayMaxEl_ReturnedException()
         {
             int[][] array = new int[3][];
-            JaggedArray.BubbleSortJaggedArraySum(array, true);
+            JaggedArray.SortJaggedArray(array, new CompareAbsMaxLine());
         }
 
         [Test]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void JaggedArrayMethodTest_SortArrayMaxEl_ReturnedException()
-        {
-            int[][] array = new int[5][];
-            JaggedArray.BubbleSortJaggedArrayMax(array, true);
-        }
-
-        [Test]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void JaggedArrayMethodTest_SortArrayMinEl_ReturnedException()
-        {
-            int[][] array = new int[13][];
-            JaggedArray.BubbleSortJaggedArrayMin(array, true);
-        }
-
-        [Test]
-        public void JaggedArrayMethodTest_SortArrayIncreaseSumEl_ReturnedSortArray()
+        public void JaggedArrayTest_SortArraySumEl_ReturnedSortArray()
         {
             int[][] array =
             {
-                new int[] { 8, 5, 4 },
-                new int[] { 1, 16, 3, 5 },
-                new int[] { 5, 7 }
+                 new int[] { 8, 5, 4 },
+                 new int[] { 1, 16, 3, 5 },
+                 new int[] { 5, 7 }
             };
 
             int[][] expected =
@@ -52,7 +36,7 @@ namespace ClassLibraryJaggedArrayNunit
                 new int[] { 1, 16, 3, 5 }
             };
             
-            int[][] actual = JaggedArray.BubbleSortJaggedArraySum(array, true);
+            int[][] actual = JaggedArray.SortJaggedArray(array, new CompareSumLine());
 
             Assert.That(expected[0], Is.EqualTo(actual[0]));
             Assert.That(expected[1], Is.EqualTo(actual[1]));
@@ -60,7 +44,7 @@ namespace ClassLibraryJaggedArrayNunit
         }
 
         [Test]
-        public void JaggedArrayMethodTest_SortArrayDecreaseSumEl_ReturnedSortArray()
+        public void JaggedArrayTest_SortArrayDecreaseSumEl_ReturnedSortArray()
         {
             int[][] array =
             {
@@ -68,7 +52,7 @@ namespace ClassLibraryJaggedArrayNunit
                 new int[] { 1, 16, 3, 5 },
                 new int[] { 5, 7 }
             };
-            
+
             int[][] expected =
             {
                 new int[] { 1, 16, 3, 5 },
@@ -76,7 +60,7 @@ namespace ClassLibraryJaggedArrayNunit
                 new int[] { 5, 7 }
             };
 
-            int[][] actual = JaggedArray.BubbleSortJaggedArraySum(array, false);
+            int[][] actual = JaggedArray.SortJaggedArray(array, new CompareSumLineDesc());
 
             Assert.That(expected[0], Is.EqualTo(actual[0]));
             Assert.That(expected[1], Is.EqualTo(actual[1]));
@@ -84,103 +68,7 @@ namespace ClassLibraryJaggedArrayNunit
         }
 
         [Test]
-        public void JaggedArrayMethodTest_SortArrayIncreaseMaxEl_ReturnedSortArray()
-        {
-            int[][] array =
-            {
-                new int[3] { 8, 5, 4 },
-                new int[4] { 1, 16, 3, 5 },
-                new int[2] { 5, 7 }
-            };
-
-            int[][] expected =
-            {
-                new int[2] { 5, 7 },
-                new int[3] { 8, 5, 4 },
-                new int[4] { 1, 16, 3, 5 }
-            };
-
-            int[][] actual = JaggedArray.BubbleSortJaggedArrayMax(array);
-
-            Assert.That(expected[0], Is.EqualTo(actual[0]));
-            Assert.That(expected[1], Is.EqualTo(actual[1]));
-            Assert.That(expected[2], Is.EqualTo(actual[2]));
-        }
-
-        [Test]
-        public void JaggedArrayMethodTest_SortArrayDecreaseMaxEl_ReturnedSortArray()
-        {
-            int[][] array =
-            {
-                new int[3] { 8, 5, 4 },
-                new int[4] { 1, 16, 3, 5 },
-                new int[2] { 5, 7 }
-            };
-
-            int[][] expected =
-            {
-                new int[4] { 1, 16, 3, 5 },
-                new int[3] { 8, 5, 4 },
-                new int[2] { 5, 7 }
-            };
-
-            int[][] actual = JaggedArray.BubbleSortJaggedArrayMax(array, false);
-
-            Assert.That(expected[0], Is.EqualTo(actual[0]));
-            Assert.That(expected[1], Is.EqualTo(actual[1]));
-            Assert.That(expected[2], Is.EqualTo(actual[2]));
-        }
-
-        [Test]
-        public void JaggedArrayMethodTest_SortArrayIncreaseMinEl_ReturnedSortArray()
-        {
-            int[][] array =
-            {
-                new int[] { 8, 5, 4 },
-                new int[] { 1, 6, 3, 5 },
-                new int[] { 5, 7 }
-            };
-
-            int[][] expected =
-            {
-                new int[4] { 1, 6, 3, 5 },
-                new int[3] { 8, 5, 4 },
-                new int[2] { 5, 7 }
-            };
-            
-            int[][] actual = JaggedArray.BubbleSortJaggedArrayMin(array);
-
-            Assert.That(expected[0], Is.EqualTo(actual[0]), "{0} != {1}", expected[0], Is.EqualTo(actual[0]));
-            Assert.That(expected[1], Is.EqualTo(actual[1]), "{0} != {1}", expected[1], Is.EqualTo(actual[1]));
-            Assert.That(expected[2], Is.EqualTo(actual[2]), "{0} != {1}", expected[2], Is.EqualTo(actual[2]));
-        }
-
-        [Test]
-        public void JaggedArrayMethodTest_SortArrayDecreaseMinEl_ReturnedSortArray()
-        {
-            int[][] array =
-            {
-                new int[] { 8, 5, 4 },
-                new int[] { 1, 6, 3, 5 },
-                new int[] { 5, 7 }
-            };
-
-            int[][] expected =
-            {
-                new int[2] { 5, 7 },
-                new int[3] { 8, 5, 4 },
-                new int[4] { 1, 6, 3, 5 }
-            };
-
-            int[][] actual = JaggedArray.BubbleSortJaggedArrayMin(array, false);
-
-            Assert.That(expected[0], Is.EqualTo(actual[0]), "{0} != {1}", expected[0], Is.EqualTo(actual[0]));
-            Assert.That(expected[1], Is.EqualTo(actual[1]), "{0} != {1}", expected[1], Is.EqualTo(actual[1]));
-            Assert.That(expected[2], Is.EqualTo(actual[2]), "{0} != {1}", expected[2], Is.EqualTo(actual[2]));
-        }
-
-        [Test]
-        public void JaggedArrayMethodTest_SortNegativeArrayDecreaseMinEl_ReturnedSortArray()
+        public void JaggedArrayTest_SortArrayMaxEl_ReturnedSortArray()
         {
             int[][] array =
             {
@@ -196,7 +84,79 @@ namespace ClassLibraryJaggedArrayNunit
                 new int[4] { 1, 6, 3, 5 }
             };
 
-            int[][] actual = JaggedArray.BubbleSortJaggedArrayMin(array, true);
+            int[][] actual = JaggedArray.SortJaggedArray(array, new CompareAbsMaxLineDesc());
+
+            Assert.That(expected[0], Is.EqualTo(actual[0]));
+            Assert.That(expected[1], Is.EqualTo(actual[1]));
+            Assert.That(expected[2], Is.EqualTo(actual[2]));
+        }
+
+        [Test]
+        public void JaggedArrayTest_SortArrayDecreaseMaxEl_ReturnedSortArray()
+        {
+            int[][] array =
+            {
+                new int[3] { 8, 5, 4 },
+                new int[4] { 1, 16, 3, 5 },
+                new int[2] { 5, 7 }
+            };
+
+            int[][] expected =
+            {
+                new int[4] { 1, 16, 3, 5 },
+                new int[3] { 8, 5, 4 },
+                new int[2] { 5, 7 }
+            };
+
+            int[][] actual = JaggedArray.SortJaggedArray(array, new CompareAbsMaxLineDesc());
+
+            Assert.That(expected[0], Is.EqualTo(actual[0]));
+            Assert.That(expected[1], Is.EqualTo(actual[1]));
+            Assert.That(expected[2], Is.EqualTo(actual[2]));
+        }
+
+        [Test]
+        public void JaggedArrayTest_SortArrayMinEl_ReturnedSortArray()
+        {
+            int[][] array =
+            {
+                new int[] { 8, 5, 4 },
+                new int[] { 1, 6, 3, 5 },
+                new int[] { 5, 7 }
+            };
+
+            int[][] expected =
+            {
+                new int[4] { 1, 6, 3, 5 },
+                new int[3] { 8, 5, 4 },
+                new int[2] { 5, 7 }
+            };
+
+            int[][] actual = JaggedArray.SortJaggedArray(array, new CompareMinLine());
+
+            Assert.That(expected[0], Is.EqualTo(actual[0]), "{0} != {1}", expected[0], Is.EqualTo(actual[0]));
+            Assert.That(expected[1], Is.EqualTo(actual[1]), "{0} != {1}", expected[1], Is.EqualTo(actual[1]));
+            Assert.That(expected[2], Is.EqualTo(actual[2]), "{0} != {1}", expected[2], Is.EqualTo(actual[2]));
+        }
+
+        [Test]
+        public void JaggedArrayTest_SortArrayDecreaseMinEl_ReturnedSortArray()
+        {
+            int[][] array =
+            {
+                new int[] { 8, 5, 4 },
+                new int[] { 1, 6, 3, 5 },
+                new int[] { 5, 7 }
+            };
+
+            int[][] expected =
+            {
+                new int[2] { 5, 7 },
+                new int[3] { 8, 5, 4 },
+                new int[4] { 1, 6, 3, 5 }
+            };
+
+            int[][] actual = JaggedArray.SortJaggedArray(array, new CompareMinLineDesc());
 
             Assert.That(expected[0], Is.EqualTo(actual[0]), "{0} != {1}", expected[0], Is.EqualTo(actual[0]));
             Assert.That(expected[1], Is.EqualTo(actual[1]), "{0} != {1}", expected[1], Is.EqualTo(actual[1]));
