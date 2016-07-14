@@ -7,13 +7,13 @@ using ClassLibraryLogicJaggedArray;
 
 namespace ClassLibraryJaggedArrayNunit
 {
-    public class CompareSumLineDesc : ICustomComparer
+    public class ComparerMinLineDesc : ICustomComparer
     {
         public int Compare(int[] a, int[] b)
         {
-            if (a.SumLine() < b.SumLine())
+            if (a.MinLine() < b.MinLine())
                 return 1;
-            if (a.SumLine() > b.SumLine())
+            if (a.MinLine() > b.MinLine())
                 return -1;
             else
                 return 0;

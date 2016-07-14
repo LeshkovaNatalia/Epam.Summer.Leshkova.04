@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ICustomComparer.cs" />
-    <Compile Include="JaggedArray.cs" />
+    <Compile Include="JaggedArrayDelegateToInterface.cs" />
+    <Compile Include="JaggedArrayInterfaceToDelegate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

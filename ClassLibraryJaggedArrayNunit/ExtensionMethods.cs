@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ClassLibraryLogicJaggedArray
+namespace ClassLibraryJaggedArrayNunit
 {
     public static class ExtensionMethods
     {
@@ -11,6 +15,9 @@ namespace ClassLibraryLogicJaggedArray
         /// </summary>
         public static int MaxLine(this int[] array)
         {
+            if (array == null)
+                throw new ArgumentNullException(nameof(array));
+
             int max = array[0];
 
             for (int i = 1; i < array.Length; i++)
@@ -27,6 +34,9 @@ namespace ClassLibraryLogicJaggedArray
         /// </summary>
         public static int AbsMaxLine(this int[] array)
         {
+            if (array == null)
+                throw new ArgumentNullException(nameof(array));
+
             int max = Math.Abs(array[0]);
 
             for (int i = 1; i < array.Length; i++)
@@ -43,6 +53,9 @@ namespace ClassLibraryLogicJaggedArray
         /// </summary>
         public static int MinLine(this int[] array)
         {
+            if (array == null)
+                throw new ArgumentNullException(nameof(array));
+
             int min = array[0];
 
             for (int i = 1; i < array.Length; i++)
@@ -59,6 +72,9 @@ namespace ClassLibraryLogicJaggedArray
         /// </summary>
         public static int SumLine(this int[] array)
         {
+            if (array == null)
+                throw new ArgumentNullException(nameof(array));
+
             int sum = 0;
 
             foreach (int element in array)
