@@ -9,27 +9,19 @@ namespace ClassLibraryLogicJaggedArray
     public static class JaggedArrayInterfaceToDelegate
     {
         #region Public Methods
-
-        /// <summary>
-        /// Delegate MethodSort use as comparator for sort
-        /// </summary>
-        /// <param name="fArray">First array for compare</param>
-        /// <param name="sArray">Second array for compare</param>
-        /// <returns>Returns result of comparing two arrays</returns>
-        public delegate int MethodSort(int[] fArray, int[] sArray);
-
+        
         /// <summary>
         /// Sorting elements of matrix rows according to comparator
         /// </summary>
-        public static void SortJaggedArray(int[][] array, ICustomComparer comparer)
+        public static void SortJaggedArray(int[][] array, IComparer<int[]> comparer)
         {
-            SortArray(array, (MethodSort)comparer.Compare);
+            SortArray(array, comparer.Compare);
         }
 
         /// <summary>
         /// Sorting elements of matrix rows according to comparator
         /// </summary>
-        public static void SortArray(int[][] array, MethodSort comparer)
+        public static void SortArray(int[][] array, Comparison<int[]> comparer)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));

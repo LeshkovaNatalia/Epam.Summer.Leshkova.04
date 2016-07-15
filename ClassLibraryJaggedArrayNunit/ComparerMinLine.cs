@@ -7,7 +7,7 @@ using ClassLibraryLogicJaggedArray;
 
 namespace ClassLibraryJaggedArrayNunit
 {
-    public class ComparerMinLine : ICustomComparer
+    public class ComparerMinLine : IComparer<int[]>
     {
         public int Compare(int[] a, int[] b)
         {

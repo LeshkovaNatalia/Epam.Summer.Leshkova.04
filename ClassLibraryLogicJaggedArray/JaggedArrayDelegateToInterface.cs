@@ -12,17 +12,9 @@ namespace ClassLibraryLogicJaggedArray
         #region Public Methods
 
         /// <summary>
-        /// Delegate MethodSort use as comparator for sort
-        /// </summary>
-        /// <param name="fArray">First array for compare</param>
-        /// <param name="sArray">Second array for compare</param>
-        /// <returns>Returns result of comparing two arrays</returns>
-        public delegate int MethodSort(int[] fArray, int[] sArray);
-
-        /// <summary>
         /// Sorting elements of matrix rows according to comparator
         /// </summary>
-        public static void SortJaggedArray(int[][] array, ICustomComparer comparer)
+        public static void SortJaggedArray(int[][] array, IComparer<int[]> comparer)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
@@ -44,20 +36,48 @@ namespace ClassLibraryLogicJaggedArray
         /// <summary>
         /// Sorting elements of matrix rows according to comparator.
         /// </summary>
-        public static void SortArray(int[][] array, MethodSort comparer)
+        public static void SortArray(int[][] array, Comparison<int[]> comparer)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
             if (comparer == null)
                 throw new ArgumentNullException(nameof(comparer));
-
-            var currentComparer = comparer.Target as ICustomComparer;
-            SortJaggedArray(array, currentComparer);
+            
+            SortJaggedArray(array, new CompareAdapter(comparer));
         }
 
         #endregion
 
-        #region Private Methods
+        #region Private Class Methods
+
+        /// <summary>
+        /// Class CompareAdapter is Adapter between delegate and interface
+        /// </summary>
+        private class CompareAdapter : IComparer<int[]>
+        {
+            #region Field
+            private readonly Comparison<int[]> _comparison;
+            #endregion
+
+            #region Ctor
+            public CompareAdapter(Comparison<int[]> comparison)
+            {
+                _comparison = comparison;
+            }
+            #endregion
+
+            #region Public Method
+            /// <summary>
+            /// Method Compare compare two array
+            /// </summary>
+            /// <param name="x">First array</param>
+            /// <param name="y">Second array</param>
+            public int Compare(int[] x, int[] y)
+            {
+                return _comparison(x, y);
+            }
+            #endregion
+        }
 
         /// <summary>
         /// Method Swap swaps arrays 
